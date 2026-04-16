@@ -1,4 +1,6 @@
 import express, { Application, NextFunction, Request, Response } from 'express';
+import router from './app/modules/routes';
+import { errorHandler } from './app/middleware/globalErrorHandler';
 
 
 export const app: Application = express()
@@ -20,17 +22,14 @@ app.use(express.json());
 // Parse URL-encoded bodies (optional, but good to have)
 // app.use(express.urlencoded({ extended: true }));
 
-// // serve uploaded files
-// app.use('/files', express.static(path.join(process.cwd(), 'files')));
-
-// app.use("/api/v1/", router);
 
 app.get('/health', (req: Request, res: Response) => {
     res.send('Hello Urban Farming!')
 })
+app.use("/api/v1/", router);
 
-// //global error handler
-// app.use(errorHandler);
+//global error handler
+app.use(errorHandler);
 
 // //not found
 // app.use(notFound);

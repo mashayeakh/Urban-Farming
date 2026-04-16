@@ -1,0 +1,14 @@
+model VendorProfile {
+    id                  String               @id @default(cuid())
+    farmName            String
+    farmLocation        String
+    certificationStatus VendorStatus         @default(PENDING)
+    userId              String               @unique
+    user                User                 @relation(fields: [userId], references: [id])
+    products            Product[]
+    rentalSpaces        RentalSpace[]
+    orders              Order[]
+    sustainabilityCerts SustainabilityCert[]
+
+    @@map("vendor_profiles")
+}

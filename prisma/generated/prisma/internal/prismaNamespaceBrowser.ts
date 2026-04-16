@@ -51,7 +51,13 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  User: 'User'
+  CommunityPost: 'CommunityPost',
+  Order: 'Order',
+  Product: 'Product',
+  RentalSpace: 'RentalSpace',
+  SustainabilityCert: 'SustainabilityCert',
+  User: 'User',
+  VendorProfile: 'VendorProfile'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -70,13 +76,86 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+export const CommunityPostScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  postContent: 'postContent',
+  postDate: 'postDate'
+} as const
+
+export type CommunityPostScalarFieldEnum = (typeof CommunityPostScalarFieldEnum)[keyof typeof CommunityPostScalarFieldEnum]
+
+
+export const OrderScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  produceId: 'produceId',
+  vendorId: 'vendorId',
+  status: 'status',
+  orderDate: 'orderDate'
+} as const
+
+export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum]
+
+
+export const ProductScalarFieldEnum = {
+  id: 'id',
+  vendorId: 'vendorId',
+  name: 'name',
+  description: 'description',
+  price: 'price',
+  category: 'category',
+  certificationStatus: 'certificationStatus',
+  availableQuantity: 'availableQuantity'
+} as const
+
+export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
+
+
+export const RentalSpaceScalarFieldEnum = {
+  id: 'id',
+  vendorId: 'vendorId',
+  location: 'location',
+  size: 'size',
+  price: 'price',
+  availability: 'availability'
+} as const
+
+export type RentalSpaceScalarFieldEnum = (typeof RentalSpaceScalarFieldEnum)[keyof typeof RentalSpaceScalarFieldEnum]
+
+
+export const SustainabilityCertScalarFieldEnum = {
+  id: 'id',
+  vendorId: 'vendorId',
+  certifyingAgency: 'certifyingAgency',
+  certificationDate: 'certificationDate'
+} as const
+
+export type SustainabilityCertScalarFieldEnum = (typeof SustainabilityCertScalarFieldEnum)[keyof typeof SustainabilityCertScalarFieldEnum]
+
+
 export const UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
-  name: 'name'
+  name: 'name',
+  password: 'password',
+  role: 'role',
+  status: 'status',
+  createdAt: 'createdAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const VendorProfileScalarFieldEnum = {
+  id: 'id',
+  farmName: 'farmName',
+  farmLocation: 'farmLocation',
+  certificationStatus: 'certificationStatus',
+  userId: 'userId'
+} as const
+
+export type VendorProfileScalarFieldEnum = (typeof VendorProfileScalarFieldEnum)[keyof typeof VendorProfileScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -93,12 +172,4 @@ export const QueryMode = {
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
-
-
-export const NullsOrder = {
-  first: 'first',
-  last: 'last'
-} as const
-
-export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 

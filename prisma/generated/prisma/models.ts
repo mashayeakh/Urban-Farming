@@ -8,5 +8,11 @@
  *
  * 🟢 You can import this file directly.
  */
+export type * from './models/CommunityPost'
+export type * from './models/Order'
+export type * from './models/Product'
+export type * from './models/RentalSpace'
+export type * from './models/SustainabilityCert'
 export type * from './models/User'
+export type * from './models/VendorProfile'
 export type * from './commonInputTypes'

@@ -54,6 +54,7 @@
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
+    "types": ["node"],
     "forceConsistentCasingInFileNames": true,
     "ignoreDeprecations": "5.0",
     "baseUrl": ".",                    
@@ -63,7 +64,8 @@
   },
   "include": [
     "src/**/*", 
-    "prisma/generated/**/*"
+    "prisma/generated/**/*",
+    "prisma.config.ts"
   ],
   "exclude": ["node_modules", "dist"]
 }

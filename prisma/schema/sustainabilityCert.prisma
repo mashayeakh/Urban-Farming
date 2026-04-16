@@ -1,0 +1,11 @@
+//- SustainabilityCert: id, vendorId, certifyingAgency, certificationDate
+model SustainabilityCert {
+    id                String   @id @default(cuid())
+    vendorId          String
+    certifyingAgency  String
+    certificationDate DateTime
+
+    vendor VendorProfile @relation(fields: [vendorId], references: [id])
+
+    @@map("sustainability_certs")
+}

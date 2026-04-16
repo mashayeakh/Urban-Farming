@@ -1,0 +1,16 @@
+//- Order: id, userId, produceId, vendorId, status, orderDate
+
+model Order {
+    id        String      @id @default(cuid())
+    userId    String
+    produceId String
+    vendorId  String
+    status    OrderStatus @default(PENDING)
+    orderDate DateTime    @default(now())
+
+    user    User          @relation(fields: [userId], references: [id])
+    product Product       @relation(fields: [produceId], references: [id])
+    vendor  VendorProfile @relation(fields: [vendorId], references: [id])
+
+    @@map("orders")
+}

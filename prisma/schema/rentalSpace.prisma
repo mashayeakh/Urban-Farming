@@ -1,0 +1,14 @@
+//- RentalSpace: id, vendorId, location, size, price, availability
+
+model RentalSpace {
+    id           String  @id @default(cuid())
+    vendorId     String
+    location     String
+    size         Float
+    price        Float
+    availability Boolean
+
+    vendor VendorProfile @relation(fields: [vendorId], references: [id])
+
+    @@map("rental_spaces")
+}
