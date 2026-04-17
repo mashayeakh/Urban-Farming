@@ -39,6 +39,7 @@ export const AuthService = {
         })
     },
 
+    //!login
     async login(payload: ILoginUser) {
         const { email, password } = payload;
 
@@ -46,6 +47,15 @@ export const AuthService = {
         const existingUser = await prisma.user.findUnique({
             where: {
                 email
+            },
+            select: {
+                id: true,
+                name: true,
+                email: true,
+                password: true,
+                role: true,
+                status: true,
+                createdAt: true,
             }
         });
 
@@ -63,8 +73,30 @@ export const AuthService = {
         //now token
         const token = generateToken(existingUser.id, existingUser.role);
 
-        return { ...existingUser, token };
+        //send back user data without password 
+        const { password: _, ...userWithoutPassword } = existingUser;
+        return { ...userWithoutPassword, token };
 
+    },
+
+    //!me - logged in user profile
+    async me(userId: string) {
+        const user = await prisma.user.findUnique({
+            where: {
+                id: userId
+            },
+            select: {
+                id: true,
+                name: true,
+                email: true,
+                role: true,
+                status: true,
+                createdAt: true,
+            }
+        });
+
+        console.log("uu", user)
+        return user
     }
 
 }

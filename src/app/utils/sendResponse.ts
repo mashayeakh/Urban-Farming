@@ -5,7 +5,7 @@ interface IResponseData<T> {
     httpStatusCode: number,
     success: boolean,
     message: string,
-    result?: T,
+    data?: T,
     meta?: {
         page: number,
         limit: number,
@@ -21,13 +21,13 @@ export const sendResponse = <T>(res: Response, responseData: IResponseData<T>) =
         httpStatusCode,
         success,
         message,
-        result,
+        data,
 
     } = responseData;
 
     res.status(httpStatusCode).json({
         success,
         message,
-        result
+        data
     })
 }

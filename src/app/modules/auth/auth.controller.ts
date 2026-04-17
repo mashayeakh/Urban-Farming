@@ -3,6 +3,7 @@ import { AuthService } from "./auth.service";
 import { Request, Response } from "express";
 import { sendResponse } from "@/app/utils/sendResponse";
 import status from "http-status";
+import { prisma } from "@/app/lib/prisma";
 
 export const AuthController = {
     async test(req: Request, res: Response) {
@@ -12,6 +13,7 @@ export const AuthController = {
         });
     },
 
+    //!register
     register: catchAsync(
         async (req: Request, res: Response) => {
             const payload = req.body;
@@ -21,11 +23,12 @@ export const AuthController = {
                 httpStatusCode: status.CREATED,
                 success: true,
                 message: "User registered successfully",
-                result
+                data: result
             })
         }
     ),
 
+    //!login
     login: catchAsync(
         async (req: Request, res: Response) => {
             const payload = req.body;
@@ -35,9 +38,31 @@ export const AuthController = {
                 httpStatusCode: status.OK,
                 success: true,
                 message: "User logged in successfully",
-                result
+                data: result
             })
         }
     ),
 
+    //! me
+    me: catchAsync(
+        async (req: Request, res: Response) => {
+            const user = await AuthService.me(req?.user?.id as string); sendResponse(res, {
+                httpStatusCode: status.OK,
+                success: true,
+                message: "User profile fetched successfully",
+                data: user
+            })
+        }
+    ),
+
+    //!admin only
+    adminOnly: catchAsync(
+        async (req: Request, res: Response) => {
+            sendResponse(res, {
+                httpStatusCode: status.OK,
+                success: true,
+                message: "Admin content accessed successfully",
+            })
+        }
+    )
 }
