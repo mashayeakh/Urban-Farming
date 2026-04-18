@@ -9,7 +9,9 @@ export const AuthMiddleware = {
         return async (req: Request, res: Response, next: NextFunction) => {
             try {
 
-                const token = req.headers.authorization;
+                // const token = req.headers.authorization;
+                //set the token from cookie
+                const token = req.cookies.token;
                 console.log({ "auth token": token })
 
                 //if token does not exist then simple do not allow.. 

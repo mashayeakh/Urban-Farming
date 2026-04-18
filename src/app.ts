@@ -1,7 +1,7 @@
 import express, { Application, NextFunction, Request, Response } from 'express';
 import router from './app/modules/routes';
 import { errorHandler } from './app/middleware/globalErrorHandler';
-
+import cookieParser from 'cookie-parser';
 
 export const app: Application = express()
 
@@ -22,6 +22,9 @@ app.use(express.json());
 // Parse URL-encoded bodies (optional, but good to have)
 // app.use(express.urlencoded({ extended: true }));
 
+
+//set the cookie in the header
+app.use(cookieParser());
 
 app.get('/health', (req: Request, res: Response) => {
     res.send('Hello Urban Farming!')

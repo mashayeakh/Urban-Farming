@@ -4,6 +4,7 @@ import { AppError } from "@/app/errorHelpers/AppError";
 import status from "http-status";
 import bcrypt from "bcrypt";
 import { generateToken } from "@/app/utils/jwt";
+import { Role } from "prisma/generated/prisma/enums";
 
 export const AuthService = {
     async test() {
@@ -29,14 +30,25 @@ export const AuthService = {
         //hash password
         const hashedPassword = await bcrypt.hash(password, 10);
 
+        const safeRole = role === Role.VENDOR ? Role.VENDOR : Role.CUSTOMER
+
+
         return await prisma.user.create({
             data: {
                 name,
                 email,
                 password: hashedPassword,
-                role: role as any
-            }
-        })
+                role: safeRole,
+            },
+            select: {
+                id: true,
+                name: true,
+                email: true,
+                role: true,
+                status: true,
+                createdAt: true,
+            },
+        });
     },
 
     //!login

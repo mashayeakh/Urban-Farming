@@ -34,6 +34,18 @@ export const AuthController = {
             const payload = req.body;
             const result = await AuthService.login(payload);
 
+            console.log("Result token ", result.token)
+
+            //set cookie automatically
+            res.cookie("token", result.token, {
+                httpOnly: true,
+                secure: false,
+                sameSite: "lax",
+                maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+            })
+
+
+
             sendResponse(res, {
                 httpStatusCode: status.OK,
                 success: true,
